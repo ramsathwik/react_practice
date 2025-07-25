@@ -1,24 +1,30 @@
+import { useState } from "react";
 import Appname from "./components/Appname";
 import Addtodo from "./components/Search";
-import Todo from "./components/todo";
 import Todoes from "./components/Tododata";
 
 function App() {
-  const tododata = [
-    {
-      todoname: "Buy Milk",
-      duedate: "7/10/2025",
-    },
-    {
-      todoname: "Go To College",
-      duedate: "4/10/2025",
-    },
-  ];
+  const [tododata, changetodoes] = useState([]);
+  function addtodo(todoname, duedate) {
+    let newtodo = [
+      ...tododata,
+      {
+        id: new Date().getTime(),
+        todoname,
+        duedate,
+      },
+    ];
+    changetodoes(newtodo);
+  }
+  function deletetodo(id) {
+    let newtodoes = tododata.filter((item) => item.id != id);
+    changetodoes(newtodoes);
+  }
   return (
     <center className="todo-container">
       <Appname></Appname>
-      <Addtodo></Addtodo>
-      <Todoes tododata={tododata}></Todoes>
+      <Addtodo add={addtodo}></Addtodo>
+      <Todoes tododata={tododata} changetodo={deletetodo}></Todoes>
     </center>
   );
 }
