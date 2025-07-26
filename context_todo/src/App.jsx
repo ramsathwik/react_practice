@@ -2,6 +2,8 @@ import { useState } from "react";
 import Appname from "./components/Appname";
 import Addtodo from "./components/Search";
 import Todoes from "./components/Tododata";
+import Errormsg from "./components/Errormsg";
+import { ContextObj } from "./Store/Contexts";
 
 function App() {
   const [tododata, changetodoes] = useState([]);
@@ -22,9 +24,18 @@ function App() {
   }
   return (
     <center className="todo-container">
-      <Appname></Appname>
-      <Addtodo add={addtodo}></Addtodo>
-      <Todoes tododata={tododata} changetodo={deletetodo}></Todoes>
+      <ContextObj.Provider
+        value={{
+          tododata,
+          addtodo,
+          deletetodo,
+        }}
+      >
+        <Appname></Appname>
+        <Addtodo></Addtodo>
+        <Errormsg></Errormsg>
+        <Todoes></Todoes>
+      </ContextObj.Provider>
     </center>
   );
 }

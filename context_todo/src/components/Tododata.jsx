@@ -1,13 +1,8 @@
 import Todo from "./todo";
-function Todoes({ tododata, changetodo }) {
-  return tododata.map((item) => (
-    <Todo
-      todoname={item.todoname}
-      duedate={item.duedate}
-      id={item.id}
-      key={item.id}
-      change={changetodo}
-    ></Todo>
-  ));
+import { useContext } from "react";
+import { ContextObj } from "../Store/Contexts";
+function Todoes() {
+  let { tododata } = useContext(ContextObj);
+  return tododata.map((item) => <Todo todoes={item} key={item.id}></Todo>);
 }
 export default Todoes;
