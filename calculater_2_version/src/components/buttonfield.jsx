@@ -1,5 +1,5 @@
-import styles from "./buttonfield.module.css";
-function Buttonfield() {
+import styles from "./Buttonfield.module.css";
+function Buttonfield({ func }) {
   let buttons = [
     "C",
     "1",
@@ -22,7 +22,15 @@ function Buttonfield() {
   return (
     <div className={styles.btncontainer}>
       {buttons.map((item) => (
-        <button className={styles.btn}>{item}</button>
+        <button
+          key={item}
+          className={styles.btn}
+          onClick={() => {
+            func(item);
+          }}
+        >
+          {item}
+        </button>
       ))}
     </div>
   );
